@@ -23,7 +23,7 @@ exports.parseGitStatus = function(text) {
 };
 
 exports.parseGitDiff = function(text) {
-
+  if (!text) return [];
   var lines = text.split("\n");
   var diffs = [];
 
@@ -168,10 +168,22 @@ exports.parseGitLog = function(data) {
     if (rows[index + 1] && rows[index + 1].indexOf('commit ') == 0) {
       parser = parseCommitLine;
       return;
+    } else if (rows[index + 1] && rows[index + 1].indexOf('diff ') == 0) {
+      parser = parseDiff;
+      return;
     }
     if (currentCommmit.message) currentCommmit.message += '\n';
     else currentCommmit.message = '';
     currentCommmit.message += row.trim();
+  }
+  var parseDiff = function(row, index) {
+    if (rows[index + 1] && rows[index + 1].indexOf('commit ') == 0) {
+      parser = parseCommitLine;
+      return;
+    }
+    if (currentCommmit.diff) currentCommmit.diff += '\n';
+    else currentCommmit.diff = '';
+    currentCommmit.diff += row;
   }
   var parser = parseCommitLine;
   var rows = data.split('\n');

@@ -102,7 +102,7 @@ StagingViewModel.prototype.toogleAmend = function() {
     this.commitMessageBody(this.repository.graph.HEAD().body());
   }
   else if(this.amend()) {
-    var isPrevDefaultMsg = 
+    var isPrevDefaultMsg =
       this.commitMessageTitle() == this.repository.graph.HEAD().title() &&
       this.commitMessageBody() == this.repository.graph.HEAD().body();
     if (isPrevDefaultMsg) {
@@ -168,7 +168,7 @@ StagingViewModel.prototype.mergeAbort = function() {
   this.mergeAbortProgressBar.start();
   this.app.post('/merge/abort', { path: this.repository.repoPath }, function(err, res) {
     self.mergeAbortProgressBar.stop();
-  }); 
+  });
 }
 StagingViewModel.prototype.invalidateFilesDiffs = function() {
   this.files().forEach(function(file) {
@@ -214,6 +214,7 @@ var FileViewModel = function(staging, type) {
   this.diffsProgressBar = new ProgressBarViewModel('diffs-' + this.staging.repository.repoPath);
   this.diff = type == 'image' ? new ImageDiffViewModel(this) : new LineByLineDiffViewModel(this);
 }
+exports.FileViewModel = FileViewModel;
 FileViewModel.prototype.toogleStaged = function() {
   this.staged(!this.staged());
 }
@@ -227,7 +228,7 @@ FileViewModel.prototype.ignoreFile = function() {
       // The file was already in the .gitignore, so force an update of the staging area (to hopefull clear away this file)
       self.app.workingTreeChanged();
       return true;
-    } 
+    }
   });
 }
 FileViewModel.prototype.resolveConflict = function() {
@@ -240,6 +241,9 @@ FileViewModel.prototype.toogleDiffs = function() {
     this.showingDiffs(true);
     this.invalidateDiff(true);
   }
+}
+FileViewModel.prototype.toggleDiffsNoInvalidate = function () {
+  this.showingDiffs(!this.showingDiffs());
 }
 FileViewModel.prototype.invalidateDiff = function(drawProgressBar) {
   if (this.showingDiffs() && (drawProgressBar || this.type != 'image'))
@@ -301,4 +305,4 @@ var ImageDiffViewModel = function(fileViewModel) {
 ImageDiffViewModel.prototype.invalidateDiff = function(drawProgressBar) {
 }
 
- 
+

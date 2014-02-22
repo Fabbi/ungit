@@ -167,7 +167,7 @@ exports.registerApi = function(app, server, ensureAuthenticated, config) {
     var timeoutMs = 10 * 60 * 1000;
     if (res.setTimeout) res.setTimeout(timeoutMs);
 
-    git(credentialsOption(req.param('socketId')) + ' fetch ' + req.param('remote') + ' ' + 
+    git(credentialsOption(req.param('socketId')) + ' fetch ' + req.param('remote') + ' ' +
         (req.param('ref') ? req.param('ref') : '') + (config.autoPruneOnFetch ? ' --prune' : ''),
         req.param('path'))
       .timeout(10 * 60 * 1000)
@@ -204,7 +204,7 @@ exports.registerApi = function(app, server, ensureAuthenticated, config) {
       git.binaryFileContentAtHead(req.query.path, req.query.filename)
         .always(function(err, result) {
           res.type(path.extname(req.query.filename));
-          if (err) res.json(400, err); 
+          if (err) res.json(400, err);
           else res.send(new Buffer(result, 'binary'));
         });
     } else {
@@ -230,7 +230,7 @@ exports.registerApi = function(app, server, ensureAuthenticated, config) {
 
     if (!fs.existsSync(gitIgnoreFile)) fs.writeFileSync(gitIgnoreFile, '');
 
-    fs.readFile(gitIgnoreFile, function(err, data) { 
+    fs.readFile(gitIgnoreFile, function(err, data) {
 
       var arrayOfLines = data.toString().match(/[^\r\n]+/g);
       if(arrayOfLines != null){
@@ -249,7 +249,7 @@ exports.registerApi = function(app, server, ensureAuthenticated, config) {
             socket.emit('working-tree-changed', { repository: currentPath });
           return res.json({});
         }
-      }); 
+      });
     });
   });
 
@@ -270,7 +270,7 @@ exports.registerApi = function(app, server, ensureAuthenticated, config) {
   app.get(exports.pathPrefix + '/log', ensureAuthenticated, ensurePathExists, function(req, res){
     var limit = '';
     if (req.query.limit) limit = '--max-count=' + req.query.limit;
-    git('log --decorate=full --pretty=fuller --all --parents ' + limit, req.param('path'))
+    git('log --decorate=full --pretty=fuller --all --parents -p ' + limit, req.param('path'))
       .parser(gitParser.parseGitLog)
       .always(function(err, log) {
         if (err) {
@@ -339,7 +339,7 @@ exports.registerApi = function(app, server, ensureAuthenticated, config) {
       .always(jsonResultOrFail.bind(null, res))
       .always(emitGitDirectoryChanged.bind(null, req.param('path')));
   });
-  
+
   app.del(exports.pathPrefix + '/remote/tags', ensureAuthenticated, ensurePathExists, function(req, res) {
     git(credentialsOption(req.param('socketId')) + ' push ' + req.param('remote') + ' :"refs/tags/' + req.param('name').trim() + '"', req.param('path'))
       .always(jsonResultOrFail.bind(null, res))
@@ -362,7 +362,7 @@ exports.registerApi = function(app, server, ensureAuthenticated, config) {
 
   app.get(exports.pathPrefix + '/checkout', ensureAuthenticated, ensurePathExists, function(req, res){
     var HEADFile = path.join(req.param('path'), '.git', 'HEAD');
-    if (!fs.existsSync(HEADFile)) 
+    if (!fs.existsSync(HEADFile))
       return res.json(400, { errorCode: 'not-a-repository', error: 'No such file: ' + HEADFile });
     fs.readFile(HEADFile, { encoding: 'utf8' }, function(err, text) {
       if (err) res.json(400, err);
