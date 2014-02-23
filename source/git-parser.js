@@ -67,11 +67,20 @@ exports.parseGitDiff = function(text) {
         lines.shift();
       }
     }
-
-    // Shift away index, ---, +++ and @@ stuff
-    if (lines.shift().indexOf('index ') == 0) lines.shift();
-    lines.shift();
     var diff_lines = [];
+    // Shift away index, ---, +++ and @@ stuff
+    if (lines[0].indexOf('index ') == 0) lines.shift();
+    if (lines[0] && /([-]{3}|[+]{3}).*/.test(lines[0])) {
+      lines.shift();
+      lines.shift();
+    } else {
+      // Binary Files don't show ---/+++ annotations..
+      diff_lines.push([null, null, "Binary File"]);
+      diff.lines = diff_lines;
+      diffs.push(diff);
+      lines.shift();
+      continue;
+    }
     var originalLine, newLine;
     while(lines[0] && !/^diff/.test(lines[0])) {
       var line = lines.shift();
@@ -170,7 +179,7 @@ exports.parseGitLog = function(data) {
     if (rows[index + 1] && rows[index + 1].indexOf('commit ') == 0) {
       parser = parseCommitLine;
       return;
-    } else if (rows[index + 1] && /(\d+)\s+(\d+)\s+(\S+)/.test(rows[index + 1])) {
+    } else if (rows[index + 1] && /([\d-]+)\s+([\d-]+)\s+(\S+)/.test(rows[index + 1])) {
       parser = parseChangedFiles;
       return;
     }
@@ -183,7 +192,7 @@ exports.parseGitLog = function(data) {
       parser = parseDiff;
       return;
     }
-    var group = /(\d+)\s+(\d+)\s+(\S+)/.exec(row);
+    var group = /([\d-]+)\s+([\d-]+)\s+(\S+)/.exec(row);
     if (!group) return;
     var added = group[1];
     var deleted = group[2];

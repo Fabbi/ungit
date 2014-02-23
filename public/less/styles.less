@@ -286,6 +286,12 @@ body {
 .files-changed {
     .files {
         .file {
+            .new {
+                color: #89D64D;
+            }
+            .deleted {
+                color: #DB3712;
+            }
             .name {
                 .addedLines {
                         color: #66F27B;
@@ -295,7 +301,7 @@ body {
                 }
             }
             .diffContainer {
-                height: 400px;
+                max-height: 400px;
                 overflow-y: scroll;
             }
         }

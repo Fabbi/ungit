@@ -158,20 +158,39 @@ GitNodeViewModel.prototype.setData = function(args) {
         var file = new FileViewModel(this, type);
         var currentFileName = diff.aPath;
         var currentFileInfo = args.changedFiles[currentFileName];
+        // console.log(currentFileName);
+        // console.log(self.sha1);
+        // console.log(currentFileInfo);
         file.name(currentFileName);
-        file.addedLines(currentFileInfo[0]);
-        file.deletedLines(currentFileInfo[1]);
+        file.isNew(diff.newFile);
+        file.removed(diff.deletedFile);
         var newDiff = [];
-        diff.lines.forEach(
-          function(line) {
-            newDiff.push({
-              oldLineNumber: line[0],
-              newLineNumber: line[1],
-              added: line[2][0] == '+',
-              removed: line[2][0] == '-' || line[2][0] == '\\',
-              text: line[2]
+        if (!diff.deletedFile && !diff.renamedFile) {
+          file.addedLines(currentFileInfo[0]);
+          file.deletedLines(currentFileInfo[1]);
+          diff.lines.forEach(
+            function(line) {
+              newDiff.push({
+                oldLineNumber: line[0],
+                newLineNumber: line[1],
+                added: line[2][0] == '+',
+                removed: line[2][0] == '-' || line[2][0] == '\\',
+                text: line[2]
+              });
             });
-          });
+        } else {
+          file.addedLines(null);
+          file.deletedLines(null);
+          if (!diff.deletedFile) {
+            newDiff.push({
+              oldLineNumber: null,
+              newLineNumber: null,
+              added: false,
+              removed: false,
+              text: diff.lines[0][2]
+            });
+          }
+        }
         file.diff.diffs(newDiff);
         files.push(file);
       });
