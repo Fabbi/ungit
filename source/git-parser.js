@@ -179,8 +179,8 @@ exports.parseGitLog = function(data) {
     currentCommmit.message += row.trim();
   }
   var parseChangedFiles = function(row, index) {
-    if (rows[index + 1] && rows[index + 1].indexOf('commit ') == 0) {
-      parser = parseCommitLine;
+    if (rows[index + 1] && rows[index + 1].indexOf('diff ') == 0) {
+      parser = parseDiff;
       return;
     }
     var group = /(\d+)\s+(\d+)\s+(\S+)/.exec(row);
@@ -188,8 +188,17 @@ exports.parseGitLog = function(data) {
     var added = group[1];
     var deleted = group[2];
     var file = group[3];
-    if (!currentCommmit.changedFiles) currentCommmit.changedFiles = [];
-    currentCommmit.changedFiles.push([added, deleted, file]);
+    if (!currentCommmit.changedFiles) currentCommmit.changedFiles = {};
+    currentCommmit.changedFiles[file] = [added, deleted, file];
+  }
+  var parseDiff = function(row, index) {
+    if (rows[index + 1] && rows[index + 1].indexOf('commit ') == 0) {
+      parser = parseCommitLine;
+      return;
+    }
+    if (currentCommmit.diff) currentCommmit.diff += '\n';
+    else currentCommmit.diff = '';
+    currentCommmit.diff += row;
   }
   var parser = parseCommitLine;
   var rows = data.split('\n');

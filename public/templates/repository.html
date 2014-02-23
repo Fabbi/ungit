@@ -50,7 +50,7 @@
                                         <div class="files-changed" data-bind="visible: showBody">
                                             <div class="files" data-bind="foreach: nodeFiles">
                                                 <div class="file" data-bind="css: { showingDiffs: showingDiffs }">
-                                                    <a class="name" data-bind="click: toogleDiffs,  clickBubble: false">
+                                                    <a class="name" data-bind="click: toggleDiffsNoInvalidate,  clickBubble: false">
                                                         <span class="addedLines">++<span data-bind="text: addedLines"></span></span>
                                                         <span class="removedLines">--<span data-bind="text: deletedLines"></span></span>
                                                         <span data-bind="text: name"></span>

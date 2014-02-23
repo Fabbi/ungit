@@ -8,6 +8,7 @@ var Selectable = require('./git-selectable').Selectable;
 var GraphActions = require('./git-graph-actions');
 var NodeViewModel = require('./graph-graphics/node').NodeViewModel;
 var FileViewModel = require('./staging').FileViewModel;
+var gitParser = require('../../source/git-parser');
 
 var imageFileExtensions = ['.PNG', '.JPG', '.BMP', '.GIF'];
 
@@ -150,14 +151,29 @@ GitNodeViewModel.prototype.setData = function(args) {
   this.authorEmail(args.authorEmail);
   var files = [];
   if (args.changedFiles) {
-    args.changedFiles.forEach(
-      function(changedFile) {
-        var type = imageFileExtensions.indexOf(path.extname(changedFile[2]).toUpperCase()) != -1 ? 'image' : 'text';
-        var newFile = new FileViewModel(self, type);
-        newFile.addedLines(changedFile[0]);
-        newFile.deletedLines(changedFile[1]);
-        newFile.name(changedFile[2]);
-        files.push(newFile);
+    var nDiffs = gitParser.parseGitDiff(args.diff);
+    nDiffs.forEach(
+      function(diff) {
+        var type = imageFileExtensions.indexOf(path.extname(diff.aPath).toUpperCase()) != -1 ? 'image' : 'text';
+        var file = new FileViewModel(this, type);
+        var currentFileName = diff.aPath;
+        var currentFileInfo = args.changedFiles[currentFileName];
+        file.name(currentFileName);
+        file.addedLines(currentFileInfo[0]);
+        file.deletedLines(currentFileInfo[1]);
+        var newDiff = [];
+        diff.lines.forEach(
+          function(line) {
+            newDiff.push({
+              oldLineNumber: line[0],
+              newLineNumber: line[1],
+              added: line[2][0] == '+',
+              removed: line[2][0] == '-' || line[2][0] == '\\',
+              text: line[2]
+            });
+          });
+        file.diff.diffs(newDiff);
+        files.push(file);
       });
     this.nodeFiles(files);
   }
