@@ -11,598 +11,615 @@
 // Needed to properly layout this specific page regardless of the specific bootstrap configuration/styling
 
 body {
-	padding-top: 112px;
+    padding-top: 112px;
 }
 
 .glyphicon-circled {
-	margin-right: 18px;
-	border: 5px solid #686868;
-	border-radius: 100%;
-	padding-bottom: 7px;
-	padding-top: 6px;
-	padding-right: 20px;
-	padding-left: 7px;
+    margin-right: 18px;
+    border: 5px solid #686868;
+    border-radius: 100%;
+    padding-bottom: 7px;
+    padding-top: 6px;
+    padding-right: 20px;
+    padding-left: 7px;
 }
 
 .navbar {
-	padding-top: 23px;
-	z-index: 5;
-	box-shadow: 0px 15px 15px #252833;
-	height: 92px;
+    padding-top: 23px;
+    z-index: 5;
+    box-shadow: 0px 15px 15px #252833;
+    height: 92px;
 
-	.backlink {
-		margin-left: 9px;
-		position: absolute;
-		color: #686868;
-		&:hover {
-			text-decoration: none;
-			color: #A5A5A5;
-		}
-		.glyphicon-arrow-left {
-			-webkit-transition: opacity 0.5s ease-in-out;
-			-moz-transition: opacity 0.5s ease-in-out;
-			transition: opacity 0.5s ease-in-out;
-			opacity: 0;
-			&.glyph-shown {
-				opacity: 1;
-			}
-		}
-	}
-	.form-container {
-		margin-left: 180px;
-		margin-right: 107px;
-		.path-input-form {
-			width: 100%;
-			position: relative;
-			.form-control {
-				font-size: 1.7em;
-				width: 100%;
-			}
-			.add-to-repolist {
-				position: absolute;
-				right: 4px;
-				top: 6px;
-				background: transparent;
-				border: 0px;
-				opacity: 0.3;
-				&:hover {
-					opacity: 0.8;
-				}
-			}
-		}
-	}
-	.toolbar {
-		position: absolute;
-		right: 55px;
-		top: 23px;
-		.refresh-button {
-			background: rgba(0, 0, 0, 0.1);
-			border: 0px;
-			font-size: 22px;
-		}
-	}
-	.arrowUp {
-		position: absolute;
-		bottom: 0px;
-		left: 300px;
-		background: url('../images/repositoryBackgroundArrowUp.png');
-		width: 30px;
-		height: 15px;
-	}
-	.version {
-		position: absolute;
-		right: 5px;
-		bottom: 2px;
-		font-size: 12px;
-		color: rgba(0, 0, 0, 0.5);
-	}
+    .backlink {
+        margin-left: 9px;
+        position: absolute;
+        color: #686868;
+        &:hover {
+            text-decoration: none;
+            color: #A5A5A5;
+        }
+        .glyphicon-arrow-left {
+            -webkit-transition: opacity 0.5s ease-in-out;
+            -moz-transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+            &.glyph-shown {
+                opacity: 1;
+            }
+        }
+    }
+    .form-container {
+        margin-left: 180px;
+        margin-right: 107px;
+        .path-input-form {
+            width: 100%;
+            position: relative;
+            .form-control {
+                font-size: 1.7em;
+                width: 100%;
+            }
+            .add-to-repolist {
+                position: absolute;
+                right: 4px;
+                top: 6px;
+                background: transparent;
+                border: 0px;
+                opacity: 0.3;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+    .toolbar {
+        position: absolute;
+        right: 55px;
+        top: 23px;
+        .refresh-button {
+            background: rgba(0, 0, 0, 0.1);
+            border: 0px;
+            font-size: 22px;
+        }
+    }
+    .arrowUp {
+        position: absolute;
+        bottom: 0px;
+        left: 300px;
+        background: url('../images/repositoryBackgroundArrowUp.png');
+        width: 30px;
+        height: 15px;
+    }
+    .version {
+        position: absolute;
+        right: 5px;
+        bottom: 2px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.5);
+    }
 }
 
 .home {
-	.nux {
-		text-align: center;
-		.logo-large {
-			margin-top: 20px;
-			margin-bottom: 50px;
-		}	
-	}
-	.repository {
-		position: relative;
-		min-height: 62px;
-		&.path-removed {
-			.list-group-item-heading {
-				color: #CF5353;
-			}
-		}
-		.glyphicon {
-			color: #686868;
-		}
-		&:hover .glyphicon {
-			color: #A5A5A5;
-		}
-	}
+    .nux {
+        text-align: center;
+        .logo-large {
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+    }
+    .repository {
+        position: relative;
+        min-height: 62px;
+        &.path-removed {
+            .list-group-item-heading {
+                color: #CF5353;
+            }
+        }
+        .glyphicon {
+            color: #686868;
+        }
+        &:hover .glyphicon {
+            color: #A5A5A5;
+        }
+    }
 }
 
 .repository-actions {
-	position: absolute;
-	margin-top: 20px;
-	right: 0px;
-	z-index: 30;
+    position: absolute;
+    margin-top: 20px;
+    right: 0px;
+    z-index: 30;
 }
 
 .crash {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 // -- Application specific styling ----
 .stash {
-	z-index: 4;
-	position: relative;
-	margin-left: 20px;
-	margin-right: 20px;
-	top: 30px;
-	background: #55323C;
+    z-index: 4;
+    position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
+    top: 30px;
+    background: #55323C;
 }
 
 .staging {
-	background: #643A44;
-	box-shadow: 0px -1px 15px #252833;
-	color: #B8A5A5;
-	z-index: 5;
-	position: relative;
+    background: #643A44;
+    box-shadow: 0px -1px 15px #252833;
+    color: #B8A5A5;
+    z-index: 5;
+    position: relative;
 
-	.arrowDown {
-		position: absolute;
-		left: (@log-width-small + 45px);
-		bottom: 0px;
-		.arrow {
-			background: url('../images/stagingArrowDown.png');
-		}
-	}
+    .arrowDown {
+        position: absolute;
+        left: (@log-width-small + 45px);
+        bottom: 0px;
+        .arrow {
+            background: url('../images/stagingArrowDown.png');
+        }
+    }
 
-	.file-area {
-		position: relative;
-	}
+    .file-area {
+        position: relative;
+    }
 
-	.validationError {
-		display: none;
-		color: #D6542D;
-		padding: 0.25em;
-	}
-	&:hover .validationError {
-		display: inline-block;
-	}
+    .validationError {
+        display: none;
+        color: #D6542D;
+        padding: 0.25em;
+    }
+    &:hover .validationError {
+        display: inline-block;
+    }
 
-	.diffContainer {
-		margin-top: 0px;
-		border-radius: 3px;
-		background: rgba(255, 255, 255, 0.1);
-		.imageDiff {
-			padding: 10px;
-			text-align: center;
-			.glyphicon-arrow-right {
-				font-size: 104px;
-				color: rgba(0, 0, 0, 0.3);
-			}
-		}
-	}
+    .diffContainer {
+        margin-top: 0px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.1);
+        .imageDiff {
+            padding: 10px;
+            text-align: center;
+            .glyphicon-arrow-right {
+                font-size: 104px;
+                color: rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
 
-	.discard {
-		background: transparent;
-		color: rgba(255, 255, 255, 0.3);
-		border-radius: 3px;
-		padding: 3px;
-		padding-left: 5px;
-		padding-right: 5px;
-		cursor: pointer;
-		.explanation {
-			display: none;
-		}
-		&:hover {
-			background: #000;
-			color: rgba(255, 255, 255, 0.9);
-			.explanation {
-				display: inline-block;
-			}
-		}
-	}
+    .discard {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+        padding: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: pointer;
+        .explanation {
+            display: none;
+        }
+        &:hover {
+            background: #000;
+            color: rgba(255, 255, 255, 0.9);
+            .explanation {
+                display: inline-block;
+            }
+        }
+    }
 
-	.ignore {
-		background: transparent;
-		color: rgba(255, 255, 255, 0.3);
-		border-radius: 3px;
-		padding: 3px;
-		padding-left: 5px;
-		padding-right: 5px;
-		cursor: pointer;
-		font-weight: bold;
-		.explanation {
-			display: none;
-		}
-		&:hover {
-			background: #55f;
-			color: rgba(255, 255, 255, 0.9);
-			font-weight: normal;
-			.explanation {
-				display: inline-block;
-			}
-		}
-	}
+    .ignore {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+        padding: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        .explanation {
+            display: none;
+        }
+        &:hover {
+            background: #55f;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+            .explanation {
+                display: inline-block;
+            }
+        }
+    }
 
 
-	.files {
-		position: relative;
-		.file {
-			&.showingDiffs {
-				.name {
-					background: rgba(255, 255, 255, 0.1);
-					color: #000;
-					border-bottom-left-radius: 0px;
-					border-bottom-right-radius: 0px;
-				}
-			}
-			.name {
-				background: transparent;
-				font-size: 1.3em;
-				cursor: pointer;
-				padding: 3px;
-				border: 0px;
-				border-radius: 3px;
-				color: rgba(255, 255, 255, 0.8);
-			}
-			padding: 0.3em;
-			
-			.new, .deleted, .conflict {
-				padding: 3px;
-				padding-left: 5px;
-				padding-right: 5px;
-			}
-			.new {
-				color: #89D64D;
-			}
-			.deleted {
-				color: #DB3712;
-			}
-			.conflict {
-				color: #DB12C0;
-				cursor: pointer;
-				.explanation {
-					display: none;
-				}
-				&:hover {
-					background: #A445ED;
-					color: #000;
-					border-radius: 3px;
-					.explanation {
-						display: inline;
-					}
-				}
-			}
-		}
-	}
+    .files {
+        position: relative;
+        .file {
+            &.showingDiffs {
+                .name {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: #000;
+                    border-bottom-left-radius: 0px;
+                    border-bottom-right-radius: 0px;
+                }
+            }
+            .name {
+                background: transparent;
+                font-size: 1.3em;
+                cursor: pointer;
+                padding: 3px;
+                border: 0px;
+                border-radius: 3px;
+                color: rgba(255, 255, 255, 0.8);
+            }
+            padding: 0.3em;
+
+            .new, .deleted, .conflict {
+                padding: 3px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            .new {
+                color: #89D64D;
+            }
+            .deleted {
+                color: #DB3712;
+            }
+            .conflict {
+                color: #DB12C0;
+                cursor: pointer;
+                .explanation {
+                    display: none;
+                }
+                &:hover {
+                    background: #A445ED;
+                    color: #000;
+                    border-radius: 3px;
+                    .explanation {
+                        display: inline;
+                    }
+                }
+            }
+        }
+    }
 
 }
 
-
+.files-changed {
+    .files {
+        .file {
+            .name {
+                .addedLines {
+                        color: #66F27B;
+                }
+                .removedLines {
+                    color: #E86756;
+                }
+            }
+            .diffContainer {
+                height: 400px;
+                overflow-y: scroll;
+            }
+        }
+    }
+}
 .repository-view {
-	position: relative;
-	height: auto;
-	margin-bottom: 1px;
-	padding-bottom: 1px;
+    position: relative;
+    height: auto;
+    margin-bottom: 1px;
+    padding-bottom: 1px;
 
-	.gerritIntegration {
-		float: left;
-		width: 300px;
-	}
+    .gerritIntegration {
+        float: left;
+        width: 300px;
+    }
 
-	.repositoryMain {
-		height: auto;
-		margin-bottom: 1px;
-		padding-bottom: 1px;
-		position: relative;
-		&.sidebarExtended {
-			margin-left: 330px;
-		}
-	}
+    .repositoryMain {
+        height: auto;
+        margin-bottom: 1px;
+        padding-bottom: 1px;
+        position: relative;
+        &.sidebarExtended {
+            margin-left: 330px;
+        }
+    }
 }
 
 .repository-view .graph {
 
-	position: relative;
-	margin-top: 30px;
-	margin-bottom: 1px;
-	padding-bottom: 1px;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 1px;
+    padding-bottom: 1px;
 
-	.graphLog {
-		position: relative;
-		display: inline-block;
-		top: -200px;
-		left: (@log-width-small + 25px);
-	}
+    .graphLog {
+        position: relative;
+        display: inline-block;
+        top: -200px;
+        left: (@log-width-small + 25px);
+    }
 
-	.nodeContainer {
-		position: absolute;
-		
-		.log {
-			position: absolute;
-			top: -43px;
-			&.highlighted {
-				z-index: 2;
-				.logEntryBox {
-					box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
-					background: #4B5766;
-					left: -5px;
-					.arrowRight {
-						.shadow {
-							display: block;
-						}
-						.arrow {
-							background: url('../images/logBoxHoverArrowRight.png');
-						}
-					}
-				}
-			}
-			&.hover {
-				z-index: 3;
+    .nodeContainer {
+        position: absolute;
 
-				.logEntryBox > .panel-body {
-					.title {
-						font-size: 1.3em;
-						overflow:auto;
-						white-space: inherit;
-						display: inline;
-					}
-				}
-			}
+        .log {
+            position: absolute;
+            top: -43px;
+            &.highlighted {
+                z-index: 2;
+                .logEntryBox {
+                    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.2);
+                    background: #4B5766;
+                    left: -5px;
+                    .arrowRight {
+                        .shadow {
+                            display: block;
+                        }
+                        .arrow {
+                            background: url('../images/logBoxHoverArrowRight.png');
+                        }
+                    }
+                }
+            }
+            &.hover {
+                z-index: 3;
 
-			.logEntryBox > .panel-body {
-				position: relative;
-				
-				padding: 10px;
-				margin-bottom: 0px;
-				width: @log-width-small;
-				min-height: 85px;
-				.arrowRight {
-					position: absolute;
-					right: 0px;
-					top: 5px;
-					.shadow {
-						display: none;
-					}
-				}
+                .logEntryBox > .panel-body {
+                    .title {
+                        font-size: 1.3em;
+                        overflow:auto;
+                        white-space: inherit;
+                        display: inline;
+                    }
+                }
+            }
 
-				.gravatar {
-					display: none;
-					margin-right: 10px;
-				}
+            .logEntryBox > .panel-body {
+                position: relative;
 
-				.title {
-					font-size: 1.3em;
-					overflow:hidden;
-					white-space: nowrap;
-					text-overflow: ellipsis;
-					display: block;
-				}
+                padding: 10px;
+                margin-bottom: 0px;
+                width: @log-width-small;
+                min-height: 85px;
+                .arrowRight {
+                    position: absolute;
+                    right: 0px;
+                    top: 5px;
+                    .shadow {
+                        display: none;
+                    }
+                }
 
-				.body {
-					white-space: pre-wrap;
-					word-wrap: break-word;
-					color: #8F9FA6;
-				}
-			}
-		}
+                .gravatar {
+                    display: none;
+                    margin-right: 10px;
+                }
 
-		.node {
-			position: absolute;
-			margin-left: (@log-width-small + 30px);
-			outline: none;
-		}
+                .title {
+                    font-size: 1.3em;
+                    overflow:hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    display: block;
+                }
 
-		.rightSideContainer {
-			position: absolute;
-			margin-left: (@log-width-small + 40px);
-			top: -21px;
-			width: 900px;
-			height: 40px;
-		}
+                .body {
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
+                    color: #8F9FA6;
+                }
+            }
+        }
 
-		.ref {
-			display: inline-block;
-			opacity: 0.6;
-			cursor: move;
-			margin-left: 5px;
-			margin-right: 15px;
-			margin-top: 9px;
-			outline: none;
-			padding: 2px 5px 2px 5px;
-			border: 3px solid transparent;
-			border-radius: 10px;
-			transition: border-color 0.5s;
-			-webkit-transition: border-color 0.5s;
+        .node {
+            position: absolute;
+            margin-left: (@log-width-small + 30px);
+            outline: none;
+        }
 
-			&.dragging.focused {
-				border-color: transparent;
-			}
-			&.focused {
-				border-color: #fff;
-			}
+        .rightSideContainer {
+            position: absolute;
+            margin-left: (@log-width-small + 40px);
+            top: -21px;
+            width: 900px;
+            height: 40px;
+        }
 
-			&.current {
-				font-weight: bold;
-				opacity: 1;
-			}
-			&.remote {
-				color: #89BCE8;
-				opacity: 0.3;
-			}
-			&.tag {
-				color: #EEF266;
-			}
-		}
+        .ref {
+            display: inline-block;
+            opacity: 0.6;
+            cursor: move;
+            margin-left: 5px;
+            margin-right: 15px;
+            margin-top: 9px;
+            outline: none;
+            padding: 2px 5px 2px 5px;
+            border: 3px solid transparent;
+            border-radius: 10px;
+            transition: border-color 0.5s;
+            -webkit-transition: border-color 0.5s;
 
-		.graphAction {
-			color: #fff;
-			cursor: pointer;
-			opacity: 1;
-			transition: opacity 0.2s;
-			-webkit-transition: opacity 0.2s;
-			&.dimmed {
-				opacity: 0.5;
-			}
-			&.push {
-				background: rgba(61, 139, 255, 0.9);
-			}
-			&.pull {
-				background: rgba(38, 189, 189, 0.9);
-			}
-			&.reset {
-				background: rgba(255, 129, 31, 0.9);
-			}
-			&.rebase {
-				background: rgba(65, 222, 60, 0.9);
-			}
-			&.move {
-				background: rgba(0, 0, 0, 0.1);
-			}
-			&.merge {
-				background: rgba(208, 135, 212, 0.9);
-			}
-			&.checkout {
-				background: rgba(205, 219, 55, 0.9);
-			}
-			&.delete {
-				background: rgba(214, 77, 56, 0.9);
-			}
-			&.cherry-pick {
-				background: rgba(110, 156, 110, 0.9);
-			}
-			&.uncommit {
-				background: rgba(158, 53, 20, 0.9);
-			}
-			&.revert {
-				background: rgba(179, 135, 43, 0.9);
-			}
-		}
+            &.dragging.focused {
+                border-color: transparent;
+            }
+            &.focused {
+                border-color: #fff;
+            }
 
-		.newRef {
-			opacity: 1;
-			padding-top: 2px;
-			padding-bottom: 2px;
-			margin-left: 5px;
-			.showBranchingForm {
-				background: transparent;
-				border: 0px;
-				cursor: pointer;
-				padding: 0px;
-				margin: 0px;
-				margin-top: 9px;
-				color: rgba(255, 255, 255, 0.1);
-				&:hover {
-					color: rgba(255, 255, 255, 0.7);
-				}
-			}
-			.form-inline {
-				display: inline-block;
-			}
-			input.name {
-				width: 150px;
-			}
-		}
-		
+            &.current {
+                font-weight: bold;
+                opacity: 1;
+            }
+            &.remote {
+                color: #89BCE8;
+                opacity: 0.3;
+            }
+            &.tag {
+                color: #EEF266;
+            }
+        }
 
-	}
+        .graphAction {
+            color: #fff;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.2s;
+            -webkit-transition: opacity 0.2s;
+            &.dimmed {
+                opacity: 0.5;
+            }
+            &.push {
+                background: rgba(61, 139, 255, 0.9);
+            }
+            &.pull {
+                background: rgba(38, 189, 189, 0.9);
+            }
+            &.reset {
+                background: rgba(255, 129, 31, 0.9);
+            }
+            &.rebase {
+                background: rgba(65, 222, 60, 0.9);
+            }
+            &.move {
+                background: rgba(0, 0, 0, 0.1);
+            }
+            &.merge {
+                background: rgba(208, 135, 212, 0.9);
+            }
+            &.checkout {
+                background: rgba(205, 219, 55, 0.9);
+            }
+            &.delete {
+                background: rgba(214, 77, 56, 0.9);
+            }
+            &.cherry-pick {
+                background: rgba(110, 156, 110, 0.9);
+            }
+            &.uncommit {
+                background: rgba(158, 53, 20, 0.9);
+            }
+            &.revert {
+                background: rgba(179, 135, 43, 0.9);
+            }
+        }
 
-	.graphFooter {
-		height: 60px;
-		.progressBar {
-			position: relative;
-			top: -150px;
-			margin-left: (@log-width-small);
-		}
-	}
+        .newRef {
+            opacity: 1;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-left: 5px;
+            .showBranchingForm {
+                background: transparent;
+                border: 0px;
+                cursor: pointer;
+                padding: 0px;
+                margin: 0px;
+                margin-top: 9px;
+                color: rgba(255, 255, 255, 0.1);
+                &:hover {
+                    color: rgba(255, 255, 255, 0.7);
+                }
+            }
+            .form-inline {
+                display: inline-block;
+            }
+            input.name {
+                width: 150px;
+            }
+        }
+
+
+    }
+
+    .graphFooter {
+        height: 60px;
+        .progressBar {
+            position: relative;
+            top: -150px;
+            margin-left: (@log-width-small);
+        }
+    }
 
 }
 
 .remote-icon {
-	background: url('../images/remoteIcon.png');
-	width: 12px;
-	height: 10px;
-	display: inline-block;
+    background: url('../images/remoteIcon.png');
+    width: 12px;
+    height: 10px;
+    display: inline-block;
 }
 
 .branch-icon {
-	background: url('../images/branchIcon.png');
-	width: 9px;
-	height: 10px;
-	display: inline-block;
+    background: url('../images/branchIcon.png');
+    width: 9px;
+    height: 10px;
+    display: inline-block;
 }
 
 .tag-icon {
-	background: url('../images/tagIcon.png');
-	width: 5px;
-	height: 10px;
-	display: inline-block;
+    background: url('../images/tagIcon.png');
+    width: 5px;
+    height: 10px;
+    display: inline-block;
 }
 
 .ui-autocomplete {
-	background: rgba(200, 210, 230, 1);
-	box-shadow: 13px 13px 0px rgba(0, 0, 0, 0.2);
-	border-radius: 5px;
-	margin-top: 3px;
-	position: absolute;
-	display: block;
-	left: 0px;
-	top: 0px;
-	z-index: 100;
-	list-style: none;
-	padding-left: 0px;
-	margin-left: 0px;
-	padding: 3px;
-	.ui-menu-item {
-		list-style-type: none;
-		a {
-			padding: 2px;
-			padding-left: 4px;
-			border-radius: 3px;
-			display: block;
-			color: rgba(0, 0, 0, 0.6);
-			cursor: pointer;
-			text-decoration: none;
-			&.ui-state-focus, &.ui-state-active {
-				background: rgba(11, 26, 51, 1);
-				color: #fff;
-			}
-		}
-	}
+    background: rgba(200, 210, 230, 1);
+    box-shadow: 13px 13px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin-top: 3px;
+    position: absolute;
+    display: block;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+    list-style: none;
+    padding-left: 0px;
+    margin-left: 0px;
+    padding: 3px;
+    .ui-menu-item {
+        list-style-type: none;
+        a {
+            padding: 2px;
+            padding-left: 4px;
+            border-radius: 3px;
+            display: block;
+            color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            text-decoration: none;
+            &.ui-state-focus, &.ui-state-active {
+                background: rgba(11, 26, 51, 1);
+                color: #fff;
+            }
+        }
+    }
 }
 
 @media (min-width: @screen-md-min) {
-	.repository-view .graph {
-		.nodeContainer {
-			.log {
-				.logEntryBox > .panel-body {
-					width: @log-width-large;
-					.gravatar {
-						display: block;
-					}
-				}
-			}
-			.node {
-				margin-left: (@log-width-large + 30px);
-			}
-			.rightSideContainer {
-				margin-left: (@log-width-large + 40px);
-			}
-		}
-		.graphLog {
-			left: (@log-width-large + 25px);
-		}
-	}
-	.staging {
-		.arrowDown {
-			left: (@log-width-large + 45px);
-		}
-	}
+    .repository-view .graph {
+        .nodeContainer {
+            .log {
+                .logEntryBox > .panel-body {
+                    width: @log-width-large;
+                    .gravatar {
+                        display: block;
+                    }
+                }
+            }
+            .node {
+                margin-left: (@log-width-large + 30px);
+            }
+            .rightSideContainer {
+                margin-left: (@log-width-large + 40px);
+            }
+        }
+        .graphLog {
+            left: (@log-width-large + 25px);
+        }
+    }
+    .staging {
+        .arrowDown {
+            left: (@log-width-large + 45px);
+        }
+    }
 }
 
 @media (min-width: @screen-lg-min) {

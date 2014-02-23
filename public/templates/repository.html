@@ -49,11 +49,13 @@
                                     <div class="text-muted"><span data-bind="text: authorDateFromNow"></span> | <span data-bind="text: sha1.substr(0, 8)"></span>
                                         <div class="files-changed" data-bind="visible: showBody">
                                             <div class="files" data-bind="foreach: nodeFiles">
-                                                <div class="file" data-bind="css: { showingDiffs: showingDiffs }" data-ta-container="staging-file">
-                                                    <button class="name btn btn-default" data-bind="click: toggleDiffsNoInvalidate">
+                                                <div class="file" data-bind="css: { showingDiffs: showingDiffs }">
+                                                    <a class="name" data-bind="click: toogleDiffs,  clickBubble: false">
+                                                        <span class="addedLines">++<span data-bind="text: addedLines"></span></span>
+                                                        <span class="removedLines">--<span data-bind="text: deletedLines"></span></span>
                                                         <span data-bind="text: name"></span>
                                                         <!-- ko template: { name: 'temporaryProgressBar', data: diffsProgressBar } --><!-- /ko -->
-                                                    </button>
+                                                    </a>
                                                     <!-- ko if: showingDiffs -->
                                                     <div class="diffContainer" data-bind="template: { name: templateName, data: diff }"></div>
                                                     <!-- /ko -->

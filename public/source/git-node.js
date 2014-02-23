@@ -8,7 +8,6 @@ var Selectable = require('./git-selectable').Selectable;
 var GraphActions = require('./git-graph-actions');
 var NodeViewModel = require('./graph-graphics/node').NodeViewModel;
 var FileViewModel = require('./staging').FileViewModel;
-var gitParser = require('../../source/git-parser');
 
 var imageFileExtensions = ['.PNG', '.JPG', '.BMP', '.GIF'];
 
@@ -19,6 +18,7 @@ var GitNodeViewModel = function(graph, sha1) {
 
   this.graph = graph;
   this.app = graph.repository.app;
+  this.repository = graph.repository;
   this.sha1 = sha1;
 
 
@@ -48,7 +48,6 @@ var GitNodeViewModel = function(graph, sha1) {
   });
 
   this.nodeFiles = ko.observable([]);
-  this.nodeDiffs = ko.observable([]);
   this.commitTime = ko.observable();
   this.authorTime = ko.observable();
   this.parents = ko.observable([]);
@@ -127,9 +126,17 @@ var GitNodeViewModel = function(graph, sha1) {
     new GraphActions.Revert(this.graph, this)
   ];
 }
+GitNodeViewModel.prototype.showingDiffs = function() {
+  this.nodeFiles.forEach(
+    function(file) {
+      if (file.showingDiffs()) return true;
+    });
+  return false;
+}
 inherits(GitNodeViewModel, NodeViewModel);
 exports.GitNodeViewModel = GitNodeViewModel;
 GitNodeViewModel.prototype.setData = function(args) {
+  var self = this;
   this.commitTime(moment(args.commitDate));
   this.authorTime(moment(args.authorDate));
   this.parents(args.parents || []);
@@ -141,29 +148,19 @@ GitNodeViewModel.prototype.setData = function(args) {
   this.authorDateFromNow(this.authorDate().fromNow());
   this.authorName(args.authorName);
   this.authorEmail(args.authorEmail);
-  var nDiffs = gitParser.parseGitDiff(args.diff);
-  this.nodeDiffs(nDiffs);
   var files = [];
-  nDiffs.forEach(
-    function(diff) {
-      var type = imageFileExtensions.indexOf(path.extname(diff.aPath).toUpperCase()) != -1 ? 'image' : 'text';
-      var file = new FileViewModel(this, type);
-      file.name(path.basename(diff.aPath));
-      var newDiff = [];
-      diff.lines.forEach(
-        function(line) {
-          newDiff.push({
-            oldLineNumber: line[0],
-            newLineNumber: line[1],
-            added: line[2][0] == '+',
-            removed: line[2][0] == '-' || line[2][0] == '\\',
-            text: line[2]
-          });
-        });
-      file.diff.diffs(newDiff);
-      files.push(file);
-    });
-  this.nodeFiles(files);
+  if (args.changedFiles) {
+    args.changedFiles.forEach(
+      function(changedFile) {
+        var type = imageFileExtensions.indexOf(path.extname(changedFile[2]).toUpperCase()) != -1 ? 'image' : 'text';
+        var newFile = new FileViewModel(self, type);
+        newFile.addedLines(changedFile[0]);
+        newFile.deletedLines(changedFile[1]);
+        newFile.name(changedFile[2]);
+        files.push(newFile);
+      });
+    this.nodeFiles(files);
+  }
 }
 GitNodeViewModel.prototype.updateLastAuthorDateFromNow = function(deltaT) {
   this.lastUpdatedAuthorDateFromNow = this.lastUpdatedAuthorDateFromNow || 0;

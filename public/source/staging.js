@@ -211,6 +211,8 @@ var FileViewModel = function(staging, type) {
   this.removed = ko.observable(false);
   this.conflict = ko.observable(false);
   this.showingDiffs = ko.observable(false);
+  this.addedLines = ko.observable();
+  this.deletedLines = ko.observable();
   this.diffsProgressBar = new ProgressBarViewModel('diffs-' + this.staging.repository.repoPath);
   this.diff = type == 'image' ? new ImageDiffViewModel(this) : new LineByLineDiffViewModel(this);
 }
@@ -258,7 +260,7 @@ LineByLineDiffViewModel.prototype.invalidateDiff = function(drawProgressBar) {
   var self = this;
 
   if (drawProgressBar) self.fileViewModel.diffsProgressBar.start();
-  var isTextType = self.fileViewModel.type == 'text' ? true : false;
+  var isTextType = self.fileViewModel.type == 'text';
   self.fileViewModel.app.get('/diff', { file: self.fileViewModel.name(), path: self.fileViewModel.staging.repository.repoPath}, function(err, diffs) {
     if (drawProgressBar) self.fileViewModel.diffsProgressBar.stop();
     if (err) {
