@@ -74,8 +74,17 @@ var GitNodeViewModel = function(graph, sha1) {
   this.highlighted = ko.computed(function() {
     return self.nodeIsMousehover() || self.selected();
   });
+  var hideAllDiffs = function() {
+    this.nodeFiles().forEach(
+      function(file) {
+        file.showingDiffs(false);
+      });
+  };
+  this.hideAllDiffs = hideAllDiffs;
   this.showBody = ko.computed(function() {
-    return self.nodeIsMousehover() || self.selected();
+    var show = self.nodeIsMousehover() || self.selected();
+    if (!show) self.hideAllDiffs();
+    return show;
   })
   // These are split up like this because branches and local tags can be found in the git log,
   // whereas remote tags needs to be fetched with another command (which is much slower)
@@ -158,10 +167,9 @@ GitNodeViewModel.prototype.setData = function(args) {
         var file = new FileViewModel(this, type);
         var currentFileName = diff.aPath;
         var currentFileInfo = args.changedFiles[currentFileName];
-        // console.log(currentFileName);
-        // console.log(self.sha1);
-        // console.log(currentFileInfo);
         file.name(currentFileName);
+        file.fileName(path.basename(currentFileName));
+        file.path(path.dirname(currentFileName) + "/");
         file.isNew(diff.newFile);
         file.removed(diff.deletedFile);
         var newDiff = [];
@@ -179,8 +187,8 @@ GitNodeViewModel.prototype.setData = function(args) {
               });
             });
         } else {
-          file.addedLines(null);
-          file.deletedLines(null);
+          file.addedLines("-");
+          file.deletedLines("-");
           if (!diff.deletedFile) {
             newDiff.push({
               oldLineNumber: null,

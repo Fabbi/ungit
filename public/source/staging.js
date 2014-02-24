@@ -207,6 +207,8 @@ var FileViewModel = function(staging, type) {
   this.templateName = type == 'image' ? 'imageFileDiff' : 'textFileDiff';
   this.staged = ko.observable(true);
   this.name = ko.observable();
+  this.path = ko.observable();
+  this.fileName = ko.observable();
   this.isNew = ko.observable(false);
   this.removed = ko.observable(false);
   this.conflict = ko.observable(false);

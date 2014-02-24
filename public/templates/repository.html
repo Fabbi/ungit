@@ -40,30 +40,32 @@
                                 <img class="pull-left img-circle gravatar"
                                     data-bind="attr: { src: 'http://www.gravatar.com/avatar/' + authorGravatar() + '?default=404' }"
                                     onerror="this.style.display='none';">
-                                <div>
+                                <div class="node-info">
                                     <div>
                                         <span class="title" data-bind="text: title"></span>
                                         <span class="text-muted">by <a data-bind="text: authorName, attr: { href: 'mailto:' + authorEmail() }"></a></span>
                                     </div>
                                     <div class="body" data-bind="text: body, visible: showBody"></div>
                                     <div class="text-muted"><span data-bind="text: authorDateFromNow"></span> | <span data-bind="text: sha1.substr(0, 8)"></span>
-                                        <div class="files-changed" data-bind="visible: showBody">
-                                        <!-- @TODO: TABELLE -->
-                                            <div class="files" data-bind="foreach: nodeFiles">
-                                                <div class="file" data-bind="css: { showingDiffs: showingDiffs }">
-                                                    <a class="name" data-bind="click: toggleDiffsNoInvalidate,  clickBubble: false">
-                                                        <span class="addedLines">++<span data-bind="text: addedLines"></span></span>
-                                                        <span class="removedLines">--<span data-bind="text: deletedLines"></span></span>
-                                                        <span data-bind="text: name"></span>
-                                                        <!-- ko template: { name: 'temporaryProgressBar', data: diffsProgressBar } --><!-- /ko -->
-                                                    </a>
-                                                    <span class="new" data-bind="visible: isNew">New</span>
-                                                    <span class="deleted" data-bind="visible: removed">Removed</span>
-                                                    <!-- ko if: showingDiffs -->
-                                                    <div class="diffContainer" data-bind="template: { name: templateName, data: diff }"></div>
-                                                    <!-- /ko -->
+                                    </div>
+                                </div>
+                                <div class="files-changed" data-bind="visible: showBody">
+                                    <!-- @TODO: TABELLE -->
+                                    <div class="files" data-bind="foreach: nodeFiles">
+                                        <div class="file" data-bind="css: { showingDiffs: showingDiffs }">
+                                            <a class="name" data-bind="click: toggleDiffsNoInvalidate,  clickBubble: false">
+                                                <div class="file-diff-info">
+                                                    <div class="added-lines" data-bind="style: { visibility: addedLines() == '-' ? 'hidden' : 'visible' }">++<span data-bind="text: addedLines"></span></div>
+                                                    <div class="removed-lines" data-bind="style: { visibility: deletedLines() == '-' ? 'hidden' : 'visible' }">--<span data-bind="text: deletedLines"></span></div>
                                                 </div>
-                                            </div>
+                                                <div style="display:inline-block" class="tmp" data-bind="text: path"></div><div style="display:inline-block"class="tmp2" data-bind="text: fileName"></div>
+                                                <!-- ko template: { name: 'temporaryProgressBar', data: diffsProgressBar } --><!-- /ko -->
+                                                <span class="new" data-bind="visible: isNew">New</span>
+                                                <span class="deleted" data-bind="visible: removed">Removed</span>
+                                            </a>
+                                            <!-- ko if: showingDiffs -->
+                                            <div class="diffContainer" data-bind="template: { name: templateName, data: diff }"></div>
+                                            <!-- /ko -->
                                         </div>
                                     </div>
                                 </div>

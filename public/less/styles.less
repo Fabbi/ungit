@@ -280,33 +280,8 @@ body {
             }
         }
     }
-
 }
 
-.files-changed {
-    .files {
-        .file {
-            .new {
-                color: #89D64D;
-            }
-            .deleted {
-                color: #DB3712;
-            }
-            .name {
-                .addedLines {
-                        color: #66F27B;
-                }
-                .removedLines {
-                    color: #E86756;
-                }
-            }
-            .diffContainer {
-                max-height: 400px;
-                overflow-y: scroll;
-            }
-        }
-    }
-}
 .repository-view {
     position: relative;
     height: auto;
@@ -398,19 +373,59 @@ body {
                     display: none;
                     margin-right: 10px;
                 }
+                .node-info {
+                    min-height: 80px;
+                    .title {
+                        font-size: 1.3em;
+                        overflow:hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        display: block;
+                    }
 
-                .title {
-                    font-size: 1.3em;
-                    overflow:hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    display: block;
+                    .body {
+                        white-space: pre-wrap;
+                        word-wrap: break-word;
+                        color: #8F9FA6;
+                    }
                 }
-
-                .body {
-                    white-space: pre-wrap;
-                    word-wrap: break-word;
-                    color: #8F9FA6;
+                .files-changed {
+                    border-top: 2px solid;
+                    border-color: rgba(255, 255, 255, 0.1);
+                    padding-top: 5px;
+                    margin-top: 5px;
+                    .files {
+                        .file {
+                            .new {
+                                color: #89D64D;
+                                vertical-align: 5px;
+                            }
+                            .deleted {
+                                color: #DB3712;
+                                vertical-alisgn: 5px;
+                            }
+                            .name {
+                                .file-diff-info {
+                                    width: 80px;
+                                    display: inline-block;
+                                    .added-lines {
+                                        width: 38px;
+                                        display: inline-block;
+                                        color: #66F27B;
+                                    }
+                                    .removed-lines {
+                                        width: 38px;
+                                        display: inline-block;
+                                        color: #E86756;
+                                    }
+                                }
+                            }
+                            .diffContainer {
+                                max-height: 400px;
+                                overflow-y: auto;
+                            }
+                        }
+                    }
                 }
             }
         }
